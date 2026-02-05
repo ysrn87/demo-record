@@ -36,7 +36,7 @@ npm run dev
 Go to http://localhost:3000
 
 **Credentials:**
-- Email: `privilege@example.com`
+- Email: `privilege@demo.com`
 - Password: `password123`
 
 ## Demo Mode Features
@@ -48,7 +48,7 @@ Go to http://localhost:3000
 
 ## Testing Different Roles
 
-1. Login with privilege@example.com
+1. Login with privilege@demo.com
 2. Use the role switcher to change to:
    - **ADMIN** - Test product and user management
    - **SALES** - Test sales and invoicing

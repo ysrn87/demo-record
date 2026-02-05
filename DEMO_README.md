@@ -68,7 +68,7 @@ This is a demo version with special features for demonstration purposes.
 ## 🔐 Default Login
 
 After seeding, only the PRIVILEGE user exists:
-- **Email**: privilege@example.com
+- **Email**: privilege@demo.com
 - **Password**: password123
 
 ## 📝 How Demo Mode Works

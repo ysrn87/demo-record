@@ -17,7 +17,7 @@ I've successfully created a demo version of your Product Stock Management system
   - All categories
   - All non-PRIVILEGE users
 - **What's Preserved**: 
-  - PRIVILEGE user credentials (privilege@example.com)
+  - PRIVILEGE user credentials (privilege@demo.com)
   - Company profile settings
 
 ### ✅ Feature 2: Role Switching
@@ -78,7 +78,7 @@ npm run dev
 ```
 
 ### Demo Workflow
-1. **Login**: Use privilege@example.com / password123
+1. **Login**: Use privilege@demo.com / password123
 2. **Switch Roles**: Click role switcher in top-right
 3. **Create Data**: Add products, sales, customers, etc.
 4. **Test Features**: Test different role permissions
@@ -153,7 +153,7 @@ npm run dev
 Before your first demo:
 - [ ] Database configured and migrated
 - [ ] Demo seed ran successfully
-- [ ] Can login with privilege@example.com
+- [ ] Can login with privilege@demo.com
 - [ ] Demo banner appears
 - [ ] Role switcher visible
 - [ ] Can switch between roles

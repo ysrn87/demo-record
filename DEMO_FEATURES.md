@@ -19,7 +19,7 @@ This demo version includes special features designed for demonstrations, trainin
   9. Redirects to login page
 
 ### What's Preserved
-- PRIVILEGE user account (privilege@example.com)
+- PRIVILEGE user account (privilege@demo.com)
 - Company profile settings
 - Database schema
 
@@ -250,7 +250,7 @@ The system deletes in this specific order to respect foreign key constraints:
 4. Check DATABASE_URL in .env
 
 ### Login Fails
-**Symptoms**: Cannot login with privilege@example.com  
+**Symptoms**: Cannot login with privilege@demo.com  
 **Solution**:
 1. Run: `npm run db:seed:demo`
 2. Verify .env configuration
@@ -272,7 +272,7 @@ The system deletes in this specific order to respect foreign key constraints:
 - Single credential for all demos
 - No audit trail preservation
 - Simplified authentication
-- Public credential (privilege@example.com)
+- Public credential (privilege@demo.com)
 
 For production:
 1. Remove all demo-related code

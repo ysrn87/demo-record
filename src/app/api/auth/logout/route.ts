@@ -36,7 +36,7 @@ export async function POST() {
     // Reset PRIVILEGE user role (in case it was changed during demo)
     await prisma.user.updateMany({
       where: {
-        email: 'privilege@example.com',
+        email: 'privilege@demo.com',
       },
       data: {
         role: 'PRIVILEGE',
