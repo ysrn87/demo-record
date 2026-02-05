@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, UserRole, UserStatus } from '@prisma/client';
+import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
@@ -21,14 +22,23 @@ export async function POST() {
     await prisma.product.deleteMany();
     await prisma.category.deleteMany();
 
-    // Delete non-PRIVILEGE users
-    await prisma.user.deleteMany({
-      where: {
-        role: { not: 'PRIVILEGE' },
+    // Delete ALL users
+    await prisma.user.deleteMany();
+
+    // Recreate the demo PRIVILEGE user
+    const hashedPassword = await bcrypt.hash('password123', 10);
+    await prisma.user.create({
+      data: {
+        email: 'privilege@example.com',
+        password: hashedPassword,
+        name: 'Demo Admin',
+        phone: '+1 234 567 8901',
+        role: UserRole.PRIVILEGE,
+        status: UserStatus.ACTIVE,
       },
     });
 
-    console.log('✅ Demo Reset: Database cleaned successfully');
+    console.log('✅ Demo Reset: Database cleaned and demo user recreated');
 
     return NextResponse.json({ 
       success: true, 
