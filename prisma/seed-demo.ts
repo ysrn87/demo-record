@@ -42,7 +42,7 @@ async function main() {
   console.log('\n🎉 Demo database seeded successfully!');
   console.log('\n📋 Demo Login Credentials:');
   console.log('----------------------------');
-  console.log('Email: privilege@example.com');
+  console.log('Email: privilege@demo.com');
   console.log('Password: password123');
   console.log('\n🎭 Demo Features:');
   console.log('- Switch roles after login using the role switcher');
