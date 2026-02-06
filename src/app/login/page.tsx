@@ -112,7 +112,7 @@ export default function LoginPage() {
 
           {/* Demo Credentials */}
           <div className="mt-8 pt-6 border-t border-gray-200">
-            <p className="text-xs text-gray-500 text-center mb-3">Input demo credential below to try</p>
+            <p className="text-xs text-gray-500 text-center mb-3">Demo credential</p>
             <div className="grid grid-cols-1 gap-2 text-xs">
               <div className="bg-gray-50 rounded-lg p-2">
                 <p className="font-medium text-gray-700">Super Admin</p>
