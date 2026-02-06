@@ -32,9 +32,9 @@ export default async function DashboardLayout({
         <DemoRoleSwitcher currentRole={session.user.role} userEmail={session.user.email} />
       </div>
       
-      <div className="flex flex-1 relative">
+      <div className="flex flex-1">
         {/* Sidebar */}
-        <div className="no-print">
+        <div className="no-print sticky bottom-0">
           <Sidebar userRole={session.user.role} userName={session.user.name} />
         </div>
         
