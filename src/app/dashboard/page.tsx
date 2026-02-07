@@ -1,6 +1,6 @@
 import { auth } from '@/lib/auth';
 import prisma from '@/lib/prisma';
-import { formatCurrency, formatNumber, formatDateTime } from '@/lib/utils';
+import { formatCurrency, formatNumber, formatDateTime, formatDate } from '@/lib/utils';
 import {
   Package,
   ShoppingCart,
@@ -358,7 +358,7 @@ export default async function DashboardPage() {
                               {entry.recordedBy.name}
                             </p>
                             <p className="text-xs text-gray-500">
-                              {new Date(entry.entryDate).toLocaleDateString('id-ID')}
+                              {formatDateTime(entry.date)}
                             </p>
                           </div>
                         </div>
@@ -388,17 +388,17 @@ export default async function DashboardPage() {
                     <div key={sale.id} className="p-4 hover:bg-gray-50">
                       <div className="flex items-center justify-between">
                         <div>
-                          <p className="font-medium text-gray-900">{sale.customer.name}</p>
-                          <p className="text-sm text-gray-500">
+                          <p className="font-medium text-sm text-gray-900">{sale.customer.name}</p>
+                          <p className="text-xs text-gray-500">
                             {sale.invoiceNumber} • {sale.items.length} items
                           </p>
                         </div>
                         <div className="text-right">
-                          <p className="font-semibold text-gray-900">
+                          <p className="font-medium text-sm text-gray-900">
                             {formatCurrency(Number(sale.totalAmount))}
                           </p>
                           <p className="text-xs text-gray-500">
-                            {new Date(sale.date).toLocaleDateString('id-ID')}
+                            {formatDate(sale.date)}
                           </p>
                         </div>
                       </div>
