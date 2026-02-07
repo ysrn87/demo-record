@@ -125,9 +125,9 @@ export default async function CustomersPage({
                             </span>
                           </div>
                           <div>
-                            <p className="font-medium text-gray-900">{customer.name}</p>
+                            <p className="font-medium text-xs text-gray-900">{customer.name}</p>
                             {customer.address && (
-                              <p className="text-sm text-gray-500 truncate max-w-50">
+                              <p className="text-xs text-gray-500 truncate max-w-50">
                                 {customer.address}
                               </p>
                             )}
@@ -135,29 +135,29 @@ export default async function CustomersPage({
                         </div>
                       </td>
                       <td>
-                        <p className="text-gray-900">{customer.phone || '-'}</p>
+                        <p className="text-xs text-gray-900">{customer.phone || '-'}</p>
                         {customer.email && (
-                          <p className="text-sm text-gray-500">{customer.email}</p>
+                          <p className="text-xs text-gray-500">{customer.email}</p>
                         )}
                       </td>
                       <td>
                         <div className="flex items-center gap-2">
                           <ShoppingCart className="w-4 h-4 text-gray-400" />
-                          <span className="text-gray-900">{completedSales.length}</span>
+                          <span className="text-xs text-gray-900">{completedSales.length}</span>
                         </div>
                       </td>
                       <td>
-                        <p className="font-medium text-gray-900">
+                        <p className="font-medium text-xs text-gray-900">
                           {formatCurrency(totalSpent)}
                         </p>
                       </td>
                       <td>
                         {lastOrder ? (
-                          <p className="text-sm text-gray-500">
+                          <p className="text-xs text-gray-500">
                             {formatDateTime(lastOrder.date)}
                           </p>
                         ) : (
-                          <span className="text-gray-400">-</span>
+                          <span className="text-xs text-gray-400">-</span>
                         )}
                       </td>
                       <td>

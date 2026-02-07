@@ -76,8 +76,8 @@ export default async function ProductsPage({
           <table>
             <thead>
               <tr>
-                <th>Product</th>
                 <th>Category</th>
+                <th>Product</th>
                 <th>Variants</th>
                 <th>Stock</th>
                 <th>Status</th>
@@ -112,14 +112,14 @@ export default async function ProductsPage({
                   return (
                     <tr key={product.id}>
                       <td>
+                        <span className="badge-gray">{product.category.name}</span>
+                      </td>
+                      <td>
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
-                            <Package className="w-5 h-5 text-gray-400" />
-                          </div>
                           <div>
-                            <p className="font-medium text-gray-900">{product.name}</p>
+                            <p className="font-medium text-xs text-gray-900">{product.name}</p>
                             {priceRange && (
-                              <p className="text-sm text-gray-500">
+                              <p className="text-xs text-gray-500">
                                 {priceRange.min === priceRange.max
                                   ? formatCurrency(priceRange.min)
                                   : `${formatCurrency(priceRange.min)} - ${formatCurrency(priceRange.max)}`}
@@ -129,14 +129,16 @@ export default async function ProductsPage({
                         </div>
                       </td>
                       <td>
-                        <span className="badge-gray">{product.category.name}</span>
+                        <p className="text-xs text-gray-900">{product.variants.length} total</p>
+                        {product.isActive ? (
+                          <p className='text-xs text-gray-500'>{activeVariants} active</p>
+                        ) : (
+                          <p className='text-xs text-red-400'>product inactice</p>
+                        )}
+                        {/* <p className="text-xs text-gray-500">{activeVariants} active</p> */}
                       </td>
                       <td>
-                        <p className="text-gray-900">{activeVariants} active</p>
-                        <p className="text-sm text-gray-500">{product.variants.length} total</p>
-                      </td>
-                      <td>
-                        <p className="text-gray-900">{totalStock} units</p>
+                        <p className="text-xs text-gray-900">{totalStock} units</p>
                       </td>
                       <td>
                         {product.isActive ? (

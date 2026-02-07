@@ -11,7 +11,7 @@ export default async function StockLevelsPage({
   searchParams: Promise<{ search?: string; filter?: string }>;
 }) {
   const session = await auth();
-  if (!session?.user || !['PRIVILEGE', 'ADMIN', 'WAREHOUSE'].includes(session.user.role)) {
+  if (!session?.user || !['PRIVILEGE', 'ADMIN', 'SALES','WAREHOUSE'].includes(session.user.role)) {
     redirect('/dashboard');
   }
 
@@ -19,6 +19,7 @@ export default async function StockLevelsPage({
   const search = params.search?.toLowerCase();
   const filter = params.filter;
   const isWarehouse = session.user.role === 'WAREHOUSE';
+  const isSales = session.user.role === 'SALES';
 
   const variants = await prisma.productVariant.findMany({
     where: {
@@ -98,7 +99,7 @@ export default async function StockLevelsPage({
           <p className="stat-label">Out of Stock</p>
           <p className="stat-value text-red-600">{formatNumber(stats.outOfStock)}</p>
         </div>
-        {!isWarehouse && (
+        {(!isWarehouse && !isSales) && (
           <div className="stat-card">
             <p className="stat-label">Inventory Value</p>
             <p className="stat-value text-lg">{formatCurrency(stats.totalValue)}</p>
@@ -162,14 +163,14 @@ export default async function StockLevelsPage({
           <table>
             <thead>
               <tr>
-                <th>Product / Variant</th>
-                <th>SKU</th>
                 <th>Category</th>
-                {!isWarehouse && <th className="text-right">Cost Price</th>}
-                {!isWarehouse && <th className="text-right">Selling Price</th>}
+                <th>Product/Variant</th>
+                <th>Status</th>
                 <th className="text-right">Stock</th>
                 <th className="text-right">Min Level</th>
-                <th>Status</th>
+                {(!isWarehouse && !isSales) && <th className="text-right">Cost Price</th>}
+                {(!isWarehouse && !isSales) && <th className="text-right">Selling Price</th>}
+                <th>SKU</th>
               </tr>
             </thead>
             <tbody>
@@ -192,6 +193,9 @@ export default async function StockLevelsPage({
                   return (
                     <tr key={variant.id} className={isOutOfStock ? 'bg-red-50' : isLowStock ? 'bg-yellow-50' : ''}>
                       <td>
+                        <span className="badge-gray">{variant.product.category.name}</span>
+                      </td>
+                      <td>
                         <div className="flex items-center gap-3">
                           <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${isOutOfStock ? 'bg-red-100' : isLowStock ? 'bg-yellow-100' : 'bg-gray-100'
                             }`}>
@@ -202,37 +206,10 @@ export default async function StockLevelsPage({
                             )}
                           </div>
                           <div>
-                            <p className="font-medium text-gray-900">{variant.product.name}</p>
-                            <p className="text-sm text-gray-500">{variantName}</p>
+                            <p className="font-medium text-xs text-gray-900">{variant.product.name}</p>
+                            <p className="text-xs text-gray-500">{variantName}</p>
                           </div>
                         </div>
-                      </td>
-                      <td>
-                        <code className="text-sm bg-gray-100 px-2 py-0.5 rounded">
-                          {variant.sku}
-                        </code>
-                      </td>
-                      <td>
-                        <span className="badge-gray">{variant.product.category.name}</span>
-                      </td>
-                      {!isWarehouse && (
-                        <td className="text-right">
-                          <p className="text-gray-600">{formatCurrency(variant.costPrice)}</p>
-                        </td>
-                      )}
-                      {!isWarehouse && (
-                        <td className="text-right">
-                          <p className="font-medium text-gray-900">{formatCurrency(variant.sellingPrice)}</p>
-                        </td>
-                      )}
-                      <td className="text-right">
-                        <p className={`font-bold ${isOutOfStock ? 'text-red-600' : isLowStock ? 'text-yellow-600' : 'text-gray-900'
-                          }`}>
-                          {formatNumber(variant.currentStock)}
-                        </p>
-                      </td>
-                      <td className="text-right">
-                        <p className="text-gray-500">{formatNumber(variant.minStockLevel)}</p>
                       </td>
                       <td>
                         {isOutOfStock ? (
@@ -242,6 +219,30 @@ export default async function StockLevelsPage({
                         ) : (
                           <span className="badge-success">In Stock</span>
                         )}
+                      </td>
+                      <td className="text-right text-xs">
+                        <p className={`font-bold ${isOutOfStock ? 'text-red-600' : isLowStock ? 'text-yellow-600' : 'text-gray-900'
+                          }`}>
+                          {formatNumber(variant.currentStock)}
+                        </p>
+                      </td>
+                      <td className="text-right text-xs">
+                        <p className="text-gray-500">{formatNumber(variant.minStockLevel)}</p>
+                      </td>
+                      {(!isWarehouse && !isSales) && (
+                        <td className="text-right text-xs">
+                          <p className="text-gray-600">{formatCurrency(variant.costPrice)}</p>
+                        </td>
+                      )}
+                      {(!isWarehouse && !isSales) && (
+                        <td className="text-right text-xs">
+                          <p className="font-medium text-gray-900">{formatCurrency(variant.sellingPrice)}</p>
+                        </td>
+                      )}
+                      <td>
+                        <code className="text-xs bg-gray-100 px-2 py-0.5 rounded">
+                          {variant.sku}
+                        </code>
                       </td>
                     </tr>
                   );

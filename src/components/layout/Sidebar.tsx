@@ -46,7 +46,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'Stock In', href: '/dashboard/stock-in', icon: PackagePlus, roles: ['PRIVILEGE', 'ADMIN', 'WAREHOUSE'] },
   { label: 'Sales', href: '/dashboard/sales', icon: ShoppingCart, roles: ['PRIVILEGE', 'ADMIN', 'SALES'] },
   { label: 'Customers', href: '/dashboard/customers', icon: Users, roles: ['PRIVILEGE', 'ADMIN', 'SALES'] },
-  { label: 'Stock Levels', href: '/dashboard/stock-levels', icon: Boxes, roles: ['PRIVILEGE', 'ADMIN', 'WAREHOUSE'] },
+  { label: 'Stock Levels', href: '/dashboard/stock-levels', icon: Boxes, roles: ['PRIVILEGE', 'ADMIN', 'SALES','WAREHOUSE'] },
   { label: 'Reports', href: '/dashboard/reports', icon: BarChart3, roles: ['PRIVILEGE'] },
   { label: 'User Management', href: '/dashboard/users', icon: UserCog, roles: ['PRIVILEGE', 'ADMIN'] },
   { label: 'Settings', href: '/dashboard/settings', icon: Settings, roles: ['PRIVILEGE', 'ADMIN'] },
@@ -216,7 +216,7 @@ export default function Sidebar({ userRole, userName }: SidebarProps) {
                     'flex items-center h-11 rounded-lg transition-all duration-200 ease-in-out',
                     'text-gray-600 hover:bg-gray-100 hover:text-gray-900',
                     isActive && 'bg-primary-50 text-primary-600 hover:bg-primary-100 hover:text-primary-700 shadow-sm',
-                    isCollapsed ? 'justify-center px-0' : 'px-3',
+                    isCollapsed ? 'px-3' : 'px-3',
                     'group'
                   )}
                 >
@@ -230,7 +230,7 @@ export default function Sidebar({ userRole, userName }: SidebarProps) {
                   <span className={cn(
                     'flex-1 whitespace-nowrap overflow-hidden transition-all duration-1000 ease-in-out',
                     isCollapsed 
-                      ? 'w-0 opacity-0 ml-0 translate-x-2' 
+                      ? 'w-0 opacity-0 ml-0 translate-x-0' 
                       : 'w-auto opacity-100 ml-1 translate-x-0 delay-75'
                   )}>
                     {item.label}

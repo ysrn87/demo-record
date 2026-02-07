@@ -96,12 +96,12 @@ export default async function StockInPage({
           <table>
             <thead>
               <tr>
-                <th>Entry Number</th>
-                <th>Items</th>
-                <th>Total Qty</th>
-                <th>Recorded By</th>
-                <th>Status</th>
                 <th>Date</th>
+                <th>Items</th>
+                <th>Qty</th>
+                <th>Recorder</th>
+                <th>Entry Number</th>
+                <th>Status</th>
                 <th className="text-right">Actions</th>
               </tr>
             </thead>
@@ -126,7 +126,23 @@ export default async function StockInPage({
                   return (
                     <tr key={entry.id}>
                       <td>
-                        <p className="font-mono text-sm font-medium text-gray-900">
+                        <p className="text-xs text-gray-500">
+                          {formatDateTime(entry.date)}
+                        </p>
+                      </td>
+                      <td>
+                        <p className="text-xs text-gray-900">{entry.items.length} items</p>
+                      </td>
+                      <td>
+                        <p className="font-medium text-xs text-gray-900">
+                          {formatNumber(totalQty)} units
+                        </p>
+                      </td>
+                      <td>
+                        <p className="text-xs text-gray-900">{entry.recordedBy.name}</p>
+                      </td>
+                      <td>
+                        <p className="font-mono text-xs font-medium text-gray-900">
                           {entry.entryNumber}
                         </p>
                         {entry.notes && (
@@ -136,27 +152,11 @@ export default async function StockInPage({
                         )}
                       </td>
                       <td>
-                        <p className="text-gray-900">{entry.items.length} items</p>
-                      </td>
-                      <td>
-                        <p className="font-medium text-gray-900">
-                          {formatNumber(totalQty)} units
-                        </p>
-                      </td>
-                      <td>
-                        <p className="text-gray-900">{entry.recordedBy.name}</p>
-                      </td>
-                      <td>
                         {entry.status === 'COMPLETED' ? (
                           <span className="badge-success">Completed</span>
                         ) : (
                           <span className="badge-danger">Cancelled</span>
                         )}
-                      </td>
-                      <td>
-                        <p className="text-sm text-gray-500">
-                          {formatDateTime(entry.date)}
-                        </p>
                       </td>
                       <td>
                         <div className="flex items-center justify-end gap-2">

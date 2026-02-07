@@ -255,7 +255,7 @@ export default async function DashboardPage() {
           </div>
         )}
 
-        {/* Monthly Sales / Stock Entries */}
+        {/* Monthly Stock Entries */}
         {isWarehouse ? (
           <div className="stat-card">
             <div className="flex items-start justify-between">
@@ -328,7 +328,7 @@ export default async function DashboardPage() {
 
       {/* Recent Activity */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Recent Sales / Stock Entries */}
+        {/* Recent Stock Entries */}
         {isWarehouse ? (
           <div className="card">
             <div className="card-header flex items-center justify-between">
